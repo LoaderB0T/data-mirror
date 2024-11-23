@@ -23,6 +23,7 @@ export abstract class SynchronizerStrategy<T> {
     return this._synchronizer;
   }
 
+  // @internal
   public setSynchronizer(synchronizer: Synchronizer<T>) {
     this._synchronizer = synchronizer;
   }
