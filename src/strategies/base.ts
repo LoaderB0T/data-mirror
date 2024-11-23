@@ -4,13 +4,8 @@ import { Synchronizer } from '../synchronizer.js';
 
 export abstract class SynchronizerStrategy<T> {
   private _synchronizer?: Synchronizer<T>;
-  public readonly uniqueId = Symbol();
-  public name: string;
+  public readonly uniqueIdentifier = Symbol();
   private _hash?: string;
-
-  constructor(name: string) {
-    this.name = name;
-  }
 
   protected get synchronizerId(): string {
     return this.synchronizer.id;
@@ -33,7 +28,7 @@ export abstract class SynchronizerStrategy<T> {
 
   // @internal
   public update(payload: Payload<T>) {
-    getContext().executedStrategies.push(this.name);
+    getContext().executedStrategies.push(this.uniqueIdentifier);
 
     if (this._hash === payload.hash) {
       return;

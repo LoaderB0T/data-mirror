@@ -65,7 +65,7 @@ export class Synchronizer<T> {
     const { executedStrategies } = getContext();
 
     this._strategies
-      .filter(s => !executedStrategies.includes(s.name))
+      .filter(s => !executedStrategies.includes(s.uniqueIdentifier))
       .forEach(strategy => {
         strategy.update(payload);
       });

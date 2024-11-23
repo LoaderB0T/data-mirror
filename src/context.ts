@@ -2,7 +2,7 @@ let isInContext = false;
 
 type Context = {
   hash: string;
-  executedStrategies: string[];
+  executedStrategies: symbol[];
 };
 
 let context: Context = {

@@ -25,13 +25,13 @@ export class SynchronizerWindowStrategy<T> extends SynchronizerStrategy<T> {
       update: (payload: Payload<T>) => {
         this.updateSynchronizer(payload);
       },
-      uniqueId: this.uniqueId,
+      uniqueId: this.uniqueIdentifier,
     });
   }
 
   public onUpdate(payload: Payload<T>) {
     this.getSynchronizer[this.synchronizerId]
-      .filter(x => x.uniqueId !== this.uniqueId)
+      .filter(x => x.uniqueId !== this.uniqueIdentifier)
       .forEach(callback => {
         callback.update(payload);
       });
