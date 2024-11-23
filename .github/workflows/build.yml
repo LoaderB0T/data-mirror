@@ -1,0 +1,13 @@
+name: CI
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    uses: awdware/dev/.github/workflows/nodejs.yml@main
+    secrets: inherit
