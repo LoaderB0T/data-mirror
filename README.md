@@ -1,15 +1,15 @@
-[![npm](https://img.shields.io/npm/v/typescript-starter?color=%2300d26a&style=for-the-badge)](https://www.npmjs.com/package/typescript-starter)
-[![Build Status](https://img.shields.io/github/actions/workflow/status/LoaderB0T/typescript-starter/build.yml?branch=main&style=for-the-badge)](https://github.com/LoaderB0T/typescript-starter/actions/workflows/build.yml)
-[![Sonar Quality Gate](https://img.shields.io/sonar/quality_gate/LoaderB0T_typescript-starter?server=https%3A%2F%2Fsonarcloud.io&style=for-the-badge)](https://sonarcloud.io/summary/new_code?id=LoaderB0T_typescript-starter)
-[![bundle size](https://img.shields.io/bundlephobia/minzip/typescript-starter?color=%23FF006F&label=Bundle%20Size&style=for-the-badge)](https://bundlephobia.com/package/typescript-starter)
+[![npm](https://img.shields.io/npm/v/synchronizer?color=%2300d26a&style=for-the-badge)](https://www.npmjs.com/package/synchronizer)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/LoaderB0T/synchronizer/build.yml?branch=main&style=for-the-badge)](https://github.com/LoaderB0T/synchronizer/actions/workflows/build.yml)
+[![Sonar Quality Gate](https://img.shields.io/sonar/quality_gate/LoaderB0T_synchronizer?server=https%3A%2F%2Fsonarcloud.io&style=for-the-badge)](https://sonarcloud.io/summary/new_code?id=LoaderB0T_synchronizer)
+[![bundle size](https://img.shields.io/bundlephobia/minzip/synchronizer?color=%23FF006F&label=Bundle%20Size&style=for-the-badge)](https://bundlephobia.com/package/synchronizer)
 
-# typescript-starter
+# synchronizer
 
 Tempalte for TypeScript projects with Jest, ESLint, Prettier, GitHub Actions, and more.
 
 ## Motivation 💥
 
-**typescript-starter** is a template for TypeScript (ESM&CJS) projects with Jest, ESLint, Prettier, GitHub Actions, and more.
+**synchronizer** is a template for TypeScript (ESM&CJS) projects with Jest, ESLint, Prettier, GitHub Actions, and more.
 
 ## Features 🔥
 
@@ -30,26 +30,26 @@ Tempalte for TypeScript projects with Jest, ESLint, Prettier, GitHub Actions, an
 ## Installation 📦
 
 ```console
-pnpm i typescript-starter
+pnpm i synchronizer
 // or
-yarn add typescript-starter
+yarn add synchronizer
 // or
-npm i typescript-starter
+npm i synchronizer
 ```
 
 ## Docs 📃
 
-Find a bit of documentation [here](https://github.com/LoaderB0T/typescript-starter/blob/main/DOCS.md).
+Find a bit of documentation [here](https://github.com/LoaderB0T/synchronizer/blob/main/DOCS.md).
 
 ## Usage Example 🚀
 
 ```typescript
-import { Something } from 'typescript-starter';
+import { Something } from 'synchronizer';
 ```
 
 ```typescript
 // Example: Simple text logging
-Something.dostuff('Welcome to typescript-starter!');
+Something.dostuff('Welcome to synchronizer!');
 ```
 
 ## Contributing 🧑🏻‍💻
@@ -73,4 +73,4 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 Janik Schumacher - [@LoaderB0T](https://twitter.com/LoaderB0T) - [linkedin](https://www.linkedin.com/in/janikschumacher/)
 
-Project Link: [https://github.com/LoaderB0T/typescript-starter](https://github.com/LoaderB0T/typescript-starter)
+Project Link: [https://github.com/LoaderB0T/synchronizer](https://github.com/LoaderB0T/synchronizer)

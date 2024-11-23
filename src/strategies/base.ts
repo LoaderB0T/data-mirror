@@ -1,0 +1,49 @@
+import { getContext, runInContext } from '../context.js';
+import { Payload } from '../payload.js';
+import { Synchronizer } from '../synchronizer.js';
+
+export abstract class SynchronizerStrategy<T> {
+  private _synchronizer?: Synchronizer<T>;
+  public readonly uniqueId = Symbol();
+  public name: string;
+  private _hash?: string;
+
+  constructor(name: string) {
+    this.name = name;
+  }
+
+  protected get synchronizerId(): string {
+    return this.synchronizer.id;
+  }
+
+  private get synchronizer(): Synchronizer<T> {
+    if (!this._synchronizer) {
+      throw new Error('Synchronizer not set');
+    }
+    return this._synchronizer;
+  }
+
+  public setSynchronizer(synchronizer: Synchronizer<T>) {
+    this._synchronizer = synchronizer;
+  }
+
+  abstract init(): void;
+  abstract onUpdate(value: Payload<T>): void;
+
+  // @internal
+  public update(payload: Payload<T>) {
+    getContext().executedStrategies.push(this.name);
+
+    if (this._hash === payload.hash) {
+      return;
+    }
+    this._hash = payload.hash;
+    this.onUpdate(payload);
+  }
+
+  protected updateSynchronizer(payload: Payload<T>) {
+    runInContext(() => {
+      this.synchronizer.updateFromStrategy(payload);
+    });
+  }
+}
