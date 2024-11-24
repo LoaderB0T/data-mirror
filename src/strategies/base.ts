@@ -1,26 +1,26 @@
 import { getContext, runInContext } from '../context.js';
+import { DataSync } from '../data-sync.js';
 import { Payload } from '../payload.js';
-import { Synchronizer } from '../synchronizer.js';
 
-export abstract class SynchronizerStrategy<T> {
-  private _synchronizer?: Synchronizer<T>;
+export abstract class DataSyncStrategy<T> {
+  private _dataSync?: DataSync<T>;
   public readonly uniqueIdentifier = Symbol();
   private _hash?: string;
 
-  protected get synchronizerId(): string {
-    return this.synchronizer.id;
+  protected get dataSyncId(): string {
+    return this.dataSync.id;
   }
 
-  private get synchronizer(): Synchronizer<T> {
-    if (!this._synchronizer) {
-      throw new Error('Synchronizer not set');
+  private get dataSync(): DataSync<T> {
+    if (!this._dataSync) {
+      throw new Error('DataSync not set');
     }
-    return this._synchronizer;
+    return this._dataSync;
   }
 
   // @internal
-  public setSynchronizer(synchronizer: Synchronizer<T>) {
-    this._synchronizer = synchronizer;
+  public setDataSync(dataSync: DataSync<T>) {
+    this._dataSync = dataSync;
   }
 
   abstract init(): void;
@@ -37,9 +37,9 @@ export abstract class SynchronizerStrategy<T> {
     this.onUpdate(payload);
   }
 
-  protected updateSynchronizer(payload: Payload<T>) {
+  protected updateDataSync(payload: Payload<T>) {
     runInContext(() => {
-      this.synchronizer.updateFromStrategy(payload);
+      this.dataSync.updateFromStrategy(payload);
     });
   }
 }

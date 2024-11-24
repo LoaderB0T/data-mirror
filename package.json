@@ -1,6 +1,6 @@
 {
-  "name": "synchronizer",
-  "version": "0.0.0",
+  "name": "data-sync.js",
+  "version": "0.0.1",
   "description": "A template for typescript projects",
   "main": "./lib/cjs/index.js",
   "exports": {
@@ -59,12 +59,12 @@
     "name": "Janik Schumacher (LoaderB0T)",
     "url": "https://awdware.de"
   },
-  "homepage": "https://github.com/LoaderB0T/synchronizer",
+  "homepage": "https://github.com/LoaderB0T/data-sync.js",
   "bugs": {
-    "url": "https://github.com/LoaderB0T/synchronizer/issues"
+    "url": "https://github.com/LoaderB0T/data-sync.js/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/LoaderB0T/synchronizer.git"
+    "url": "https://github.com/LoaderB0T/data-sync.js.git"
   }
 }

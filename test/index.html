@@ -2,34 +2,30 @@
 <input id="text2" type="text" />
 
 <script type="module">
-  import {
-    Synchronizer,
-    SynchronizerWindowStrategy,
-    SynchronizerBroadcastStrategy,
-  } from './test.js';
+  import { DataSync, DataSyncWindowStrategy, DataSyncBroadcastStrategy } from './test.js';
 
-  const synchronizer1 = new Synchronizer('awd', a => a).withStrategy(
-    new SynchronizerWindowStrategy(),
-    new SynchronizerBroadcastStrategy()
+  const dataSync1 = new DataSync('awd', a => a).withStrategy(
+    new DataSyncWindowStrategy(),
+    new DataSyncBroadcastStrategy()
   );
-  const synchronizer2 = new Synchronizer('awd', a => a).withStrategy(
-    new SynchronizerWindowStrategy(),
-    new SynchronizerBroadcastStrategy()
+  const dataSync2 = new DataSync('awd', a => a).withStrategy(
+    new DataSyncWindowStrategy(),
+    new DataSyncBroadcastStrategy()
   );
 
   const input1 = document.getElementById('text1');
   const input2 = document.getElementById('text2');
   input1.addEventListener('input', function (value) {
-    synchronizer1.update(value.target.value);
+    dataSync1.update(value.target.value);
   });
-  synchronizer1.listenForChanges(value => {
+  dataSync1.listenForChanges(value => {
     input1.value = value;
   });
 
   input2.addEventListener('input', function (value) {
-    synchronizer2.update(value.target.value);
+    dataSync2.update(value.target.value);
   });
-  synchronizer2.listenForChanges(value => {
+  dataSync2.listenForChanges(value => {
     input2.value = value;
   });
 </script>

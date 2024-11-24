@@ -1,27 +1,33 @@
-[![npm](https://img.shields.io/npm/v/synchronizer?color=%2300d26a&style=for-the-badge)](https://www.npmjs.com/package/synchronizer)
-[![Build Status](https://img.shields.io/github/actions/workflow/status/LoaderB0T/synchronizer/build.yml?branch=main&style=for-the-badge)](https://github.com/LoaderB0T/synchronizer/actions/workflows/build.yml)
-[![Sonar Quality Gate](https://img.shields.io/sonar/quality_gate/LoaderB0T_synchronizer?server=https%3A%2F%2Fsonarcloud.io&style=for-the-badge)](https://sonarcloud.io/summary/new_code?id=LoaderB0T_synchronizer)
-[![bundle size](https://img.shields.io/bundlephobia/minzip/synchronizer?color=%23FF006F&label=Bundle%20Size&style=for-the-badge)](https://bundlephobia.com/package/synchronizer)
+[![npm](https://img.shields.io/npm/v/data-sync.js?color=%2300d26a&style=for-the-badge)](https://www.npmjs.com/package/data-sync.js)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/LoaderB0T/data-sync.js/build.yml?branch=main&style=for-the-badge)](https://github.com/LoaderB0T/data-sync.js/actions/workflows/build.yml)
+[![Sonar Quality Gate](https://img.shields.io/sonar/quality_gate/LoaderB0T_data-sync.js?server=https%3A%2F%2Fsonarcloud.io&style=for-the-badge)](https://sonarcloud.io/summary/new_code?id=LoaderB0T_data-sync.js)
+[![bundle size](https://img.shields.io/bundlephobia/minzip/data-sync.js?color=%23FF006F&label=Bundle%20Size&style=for-the-badge)](https://bundlephobia.com/package/data-sync.js)
 
-# synchronizer
+# data-sync.js
 
-Tempalte for TypeScript projects with Jest, ESLint, Prettier, GitHub Actions, and more.
+Sync data across **any\*** boundaries.
+
+<span style="font-size: 8px">\* = Browser tabs, windows, contexts, out of the box. Extensible for everything else!</span>
 
 ## Motivation 💥
 
-**synchronizer** is a template for TypeScript (ESM&CJS) projects with Jest, ESLint, Prettier, GitHub Actions, and more.
+**data-sync.js** is a tool to synchronize data. It is extensible and can be used in various scenarios. Out of the box, it provides ways to synchronize within one window or across multiple tabs or windows (browser contexts).
 
 ## Features 🔥
 
-✅ Put features here
+✅ Synchronize data
 
-✅ Add more features here
+✅ Framework agnostic
 
-✅ Add even more features here
+✅ Hashing for data comparison
 
-✅ How about some more features?
+✅ Synchronize with callbacks
 
-✅ Ok, last one
+✅ Synchronize within one window
+
+✅ Sync across multiple tabs or windows (browser contexts)
+
+✅ Extensible for custom synchronization scenarios
 
 ## Built With 🔧
 
@@ -30,26 +36,52 @@ Tempalte for TypeScript projects with Jest, ESLint, Prettier, GitHub Actions, an
 ## Installation 📦
 
 ```console
-pnpm i synchronizer
+pnpm i data-sync.js
 // or
-yarn add synchronizer
+yarn add data-sync.js
 // or
-npm i synchronizer
+npm i data-sync.js
 ```
-
-## Docs 📃
-
-Find a bit of documentation [here](https://github.com/LoaderB0T/synchronizer/blob/main/DOCS.md).
 
 ## Usage Example 🚀
 
 ```typescript
-import { Something } from 'synchronizer';
+import { DataSync } from 'data-sync.js';
+
+const sync = new DataSync('my-sync', a => a);
+sync.listenForChanges(value => {
+  console.log('new value:', value);
+});
+sync.update('test value');
 ```
 
+### With strategies
+
 ```typescript
-// Example: Simple text logging
-Something.dostuff('Welcome to synchronizer!');
+import { DataSync } from 'data-sync.js';
+
+const sync = new DataSync('my-sync', a => a).withStrategy(
+  new DataSyncWindowStrategy(),
+  new DataSyncBroadcastStrategy()
+);
+```
+
+### Implement a custom strategy
+
+```typescript
+import { DataSyncStrategy, Payload } from 'data-sync.js';
+
+export class DataSyncBroadcastStrategy<T> extends DataSyncStrategy<T> {
+
+  public init() {
+    // Initialize the strategy
+  }
+
+  public onUpdate(payload: Payload<T>) {
+    // Handle the update to inform the remote instances about the change
+  }
+}
+
 ```
 
 ## Contributing 🧑🏻‍💻
@@ -73,4 +105,4 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 Janik Schumacher - [@LoaderB0T](https://twitter.com/LoaderB0T) - [linkedin](https://www.linkedin.com/in/janikschumacher/)
 
-Project Link: [https://github.com/LoaderB0T/synchronizer](https://github.com/LoaderB0T/synchronizer)
+Project Link: [https://github.com/LoaderB0T/data-sync.js](https://github.com/LoaderB0T/data-sync.js)

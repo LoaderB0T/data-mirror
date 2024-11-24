@@ -1,5 +1,5 @@
 import { Payload } from '../payload.js';
-import { SynchronizerStrategy } from './base.js';
+import { DataSyncStrategy } from './base.js';
 
 type WindowRegistry<T> = Record<
   string,
@@ -9,28 +9,28 @@ type WindowRegistry<T> = Record<
   }[]
 >;
 type WindowRegistryT<T> = {
-  __updateSynchronizerWindowStrategy: WindowRegistry<T>;
+  __updateDataSyncWindowStrategy: WindowRegistry<T>;
 };
 
-export class SynchronizerWindowStrategy<T> extends SynchronizerStrategy<T> {
-  private get getSynchronizer() {
+export class DataSyncWindowStrategy<T> extends DataSyncStrategy<T> {
+  private get getDataSync() {
     const win = window as typeof window & WindowRegistryT<T>;
-    win.__updateSynchronizerWindowStrategy ??= {};
-    return win.__updateSynchronizerWindowStrategy;
+    win.__updateDataSyncWindowStrategy ??= {};
+    return win.__updateDataSyncWindowStrategy;
   }
 
   public init() {
-    this.getSynchronizer[this.synchronizerId] ??= [];
-    this.getSynchronizer[this.synchronizerId].push({
+    this.getDataSync[this.dataSyncId] ??= [];
+    this.getDataSync[this.dataSyncId].push({
       update: (payload: Payload<T>) => {
-        this.updateSynchronizer(payload);
+        this.updateDataSync(payload);
       },
       uniqueId: this.uniqueIdentifier,
     });
   }
 
   public onUpdate(payload: Payload<T>) {
-    this.getSynchronizer[this.synchronizerId]
+    this.getDataSync[this.dataSyncId]
       .filter(x => x.uniqueId !== this.uniqueIdentifier)
       .forEach(callback => {
         callback.update(payload);

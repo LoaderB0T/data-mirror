@@ -1,7 +1,7 @@
 import { Payload } from '../payload.js';
-import { SynchronizerStrategy } from './base.js';
+import { DataSyncStrategy } from './base.js';
 
-export class SynchronizerBroadcastStrategy<T> extends SynchronizerStrategy<T> {
+export class DataSyncBroadcastStrategy<T> extends DataSyncStrategy<T> {
   private _broadcast?: BroadcastChannel;
 
   private get broadcast(): BroadcastChannel {
@@ -12,11 +12,9 @@ export class SynchronizerBroadcastStrategy<T> extends SynchronizerStrategy<T> {
   }
 
   public init() {
-    this._broadcast = new BroadcastChannel(
-      `__synchronizerBroadcastStrategy_${this.synchronizerId}`
-    );
+    this._broadcast = new BroadcastChannel(`__dataSyncBroadcastStrategy_${this.dataSyncId}`);
     this._broadcast.onmessage = event => {
-      this.updateSynchronizer(event.data);
+      this.updateDataSync(event.data);
     };
   }
 
