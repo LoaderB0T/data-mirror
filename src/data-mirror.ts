@@ -1,6 +1,6 @@
 import { getContext, runInContext } from './context.js';
 import { Payload } from './payload.js';
-import { DataSyncStrategy } from './strategies/base.js';
+import { DataMirrorStrategy } from './strategies/base.js';
 
 type Callback<T> = (value: T) => void;
 
@@ -8,33 +8,33 @@ type CallbackEntry<T> = {
   callback: Callback<T>;
 };
 
-type DataSyncRef = {
+type DataMirrorRef = {
   unsubscribe: () => void;
 };
 
-export class DataSync<T> {
+export class DataMirror<T> {
   public readonly _hashFn: (value: T) => string;
   private readonly _callbacks: CallbackEntry<T>[] = [];
-  private readonly _strategies: DataSyncStrategy<T>[] = [];
+  private readonly _strategies: DataMirrorStrategy<T>[] = [];
   public readonly id: string;
   private _hash: string = '';
 
   constructor(id: string, hashFn: (value: T) => string) {
-    console.log('DataSync constructor');
+    console.log('DataMirror constructor');
     this.id = id;
     this._hashFn = hashFn;
   }
 
-  public withStrategy(...strategies: DataSyncStrategy<T>[]): DataSync<T> {
+  public withStrategy(...strategies: DataMirrorStrategy<T>[]): DataMirror<T> {
     strategies.forEach(strategy => {
-      strategy.setDataSync(this);
+      strategy.setDataMirror(this);
       this._strategies.push(strategy);
       strategy.init();
     });
     return this;
   }
 
-  public listenForChanges(callback: Callback<T>): DataSyncRef {
+  public listenForChanges(callback: Callback<T>): DataMirrorRef {
     this._callbacks.push({ callback });
     return {
       unsubscribe: () => {

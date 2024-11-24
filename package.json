@@ -1,7 +1,7 @@
 {
-  "name": "data-sync.js",
-  "version": "0.0.1",
-  "description": "A template for typescript projects",
+  "name": "data-mirror",
+  "version": "0.0.2",
+  "description": "Sync data across *any* boundaries.",
   "main": "./lib/cjs/index.js",
   "exports": {
     ".": {
@@ -59,12 +59,12 @@
     "name": "Janik Schumacher (LoaderB0T)",
     "url": "https://awdware.de"
   },
-  "homepage": "https://github.com/LoaderB0T/data-sync.js",
+  "homepage": "https://github.com/LoaderB0T/data-mirror",
   "bugs": {
-    "url": "https://github.com/LoaderB0T/data-sync.js/issues"
+    "url": "https://github.com/LoaderB0T/data-mirror/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/LoaderB0T/data-sync.js.git"
+    "url": "https://github.com/LoaderB0T/data-mirror.git"
   }
 }

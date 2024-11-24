@@ -1,5 +1,5 @@
 import { Payload } from '../payload.js';
-import { DataSyncStrategy } from './base.js';
+import { DataMirrorStrategy } from './base.js';
 
 type WindowRegistry<T> = Record<
   string,
@@ -9,28 +9,28 @@ type WindowRegistry<T> = Record<
   }[]
 >;
 type WindowRegistryT<T> = {
-  __updateDataSyncWindowStrategy: WindowRegistry<T>;
+  __updateDataMirrorWindowStrategy: WindowRegistry<T>;
 };
 
-export class DataSyncWindowStrategy<T> extends DataSyncStrategy<T> {
-  private get getDataSync() {
+export class DataMirrorWindowStrategy<T> extends DataMirrorStrategy<T> {
+  private get getDataMirror() {
     const win = window as typeof window & WindowRegistryT<T>;
-    win.__updateDataSyncWindowStrategy ??= {};
-    return win.__updateDataSyncWindowStrategy;
+    win.__updateDataMirrorWindowStrategy ??= {};
+    return win.__updateDataMirrorWindowStrategy;
   }
 
   public init() {
-    this.getDataSync[this.dataSyncId] ??= [];
-    this.getDataSync[this.dataSyncId].push({
+    this.getDataMirror[this.dataMirrorId] ??= [];
+    this.getDataMirror[this.dataMirrorId].push({
       update: (payload: Payload<T>) => {
-        this.updateDataSync(payload);
+        this.updateDataMirror(payload);
       },
       uniqueId: this.uniqueIdentifier,
     });
   }
 
   public onUpdate(payload: Payload<T>) {
-    this.getDataSync[this.dataSyncId]
+    this.getDataMirror[this.dataMirrorId]
       .filter(x => x.uniqueId !== this.uniqueIdentifier)
       .forEach(callback => {
         callback.update(payload);

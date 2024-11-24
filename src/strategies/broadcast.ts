@@ -1,7 +1,7 @@
 import { Payload } from '../payload.js';
-import { DataSyncStrategy } from './base.js';
+import { DataMirrorStrategy } from './base.js';
 
-export class DataSyncBroadcastStrategy<T> extends DataSyncStrategy<T> {
+export class DataMirrorBroadcastStrategy<T> extends DataMirrorStrategy<T> {
   private _broadcast?: BroadcastChannel;
 
   private get broadcast(): BroadcastChannel {
@@ -12,9 +12,9 @@ export class DataSyncBroadcastStrategy<T> extends DataSyncStrategy<T> {
   }
 
   public init() {
-    this._broadcast = new BroadcastChannel(`__dataSyncBroadcastStrategy_${this.dataSyncId}`);
+    this._broadcast = new BroadcastChannel(`__dataMirrorBroadcastStrategy_${this.dataMirrorId}`);
     this._broadcast.onmessage = event => {
-      this.updateDataSync(event.data);
+      this.updateDataMirror(event.data);
     };
   }
 

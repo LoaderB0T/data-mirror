@@ -2,30 +2,30 @@
 <input id="text2" type="text" />
 
 <script type="module">
-  import { DataSync, DataSyncWindowStrategy, DataSyncBroadcastStrategy } from './test.js';
+  import { DataMirror, DataMirrorWindowStrategy, DataMirrorBroadcastStrategy } from './test.js';
 
-  const dataSync1 = new DataSync('awd', a => a).withStrategy(
-    new DataSyncWindowStrategy(),
-    new DataSyncBroadcastStrategy()
+  const dataMirror1 = new DataMirror('awd', a => a).withStrategy(
+    new DataMirrorWindowStrategy(),
+    new DataMirrorBroadcastStrategy()
   );
-  const dataSync2 = new DataSync('awd', a => a).withStrategy(
-    new DataSyncWindowStrategy(),
-    new DataSyncBroadcastStrategy()
+  const dataMirror2 = new DataMirror('awd', a => a).withStrategy(
+    new DataMirrorWindowStrategy(),
+    new DataMirrorBroadcastStrategy()
   );
 
   const input1 = document.getElementById('text1');
   const input2 = document.getElementById('text2');
   input1.addEventListener('input', function (value) {
-    dataSync1.update(value.target.value);
+    dataMirror1.update(value.target.value);
   });
-  dataSync1.listenForChanges(value => {
+  dataMirror1.listenForChanges(value => {
     input1.value = value;
   });
 
   input2.addEventListener('input', function (value) {
-    dataSync2.update(value.target.value);
+    dataMirror2.update(value.target.value);
   });
-  dataSync2.listenForChanges(value => {
+  dataMirror2.listenForChanges(value => {
     input2.value = value;
   });
 </script>

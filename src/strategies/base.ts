@@ -1,26 +1,26 @@
 import { getContext, runInContext } from '../context.js';
-import { DataSync } from '../data-sync.js';
+import { DataMirror } from '../data-mirror.js';
 import { Payload } from '../payload.js';
 
-export abstract class DataSyncStrategy<T> {
-  private _dataSync?: DataSync<T>;
+export abstract class DataMirrorStrategy<T> {
+  private _dataMirror?: DataMirror<T>;
   public readonly uniqueIdentifier = Symbol();
   private _hash?: string;
 
-  protected get dataSyncId(): string {
-    return this.dataSync.id;
+  protected get dataMirrorId(): string {
+    return this.dataMirror.id;
   }
 
-  private get dataSync(): DataSync<T> {
-    if (!this._dataSync) {
-      throw new Error('DataSync not set');
+  private get dataMirror(): DataMirror<T> {
+    if (!this._dataMirror) {
+      throw new Error('DataMirror not set');
     }
-    return this._dataSync;
+    return this._dataMirror;
   }
 
   // @internal
-  public setDataSync(dataSync: DataSync<T>) {
-    this._dataSync = dataSync;
+  public setDataMirror(dataMirror: DataMirror<T>) {
+    this._dataMirror = dataMirror;
   }
 
   abstract init(): void;
@@ -37,9 +37,9 @@ export abstract class DataSyncStrategy<T> {
     this.onUpdate(payload);
   }
 
-  protected updateDataSync(payload: Payload<T>) {
+  protected updateDataMirror(payload: Payload<T>) {
     runInContext(() => {
-      this.dataSync.updateFromStrategy(payload);
+      this.dataMirror.updateFromStrategy(payload);
     });
   }
 }

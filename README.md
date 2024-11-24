@@ -1,9 +1,9 @@
-[![npm](https://img.shields.io/npm/v/data-sync.js?color=%2300d26a&style=for-the-badge)](https://www.npmjs.com/package/data-sync.js)
-[![Build Status](https://img.shields.io/github/actions/workflow/status/LoaderB0T/data-sync.js/build.yml?branch=main&style=for-the-badge)](https://github.com/LoaderB0T/data-sync.js/actions/workflows/build.yml)
-[![Sonar Quality Gate](https://img.shields.io/sonar/quality_gate/LoaderB0T_data-sync.js?server=https%3A%2F%2Fsonarcloud.io&style=for-the-badge)](https://sonarcloud.io/summary/new_code?id=LoaderB0T_data-sync.js)
-[![bundle size](https://img.shields.io/bundlephobia/minzip/data-sync.js?color=%23FF006F&label=Bundle%20Size&style=for-the-badge)](https://bundlephobia.com/package/data-sync.js)
+[![npm](https://img.shields.io/npm/v/data-mirror?color=%2300d26a&style=for-the-badge)](https://www.npmjs.com/package/data-mirror)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/LoaderB0T/data-mirror/build.yml?branch=main&style=for-the-badge)](https://github.com/LoaderB0T/data-mirror/actions/workflows/build.yml)
+[![Sonar Quality Gate](https://img.shields.io/sonar/quality_gate/LoaderB0T_data-mirror?server=https%3A%2F%2Fsonarcloud.io&style=for-the-badge)](https://sonarcloud.io/summary/new_code?id=LoaderB0T_data-mirror)
+[![bundle size](https://img.shields.io/bundlephobia/minzip/data-mirror?color=%23FF006F&label=Bundle%20Size&style=for-the-badge)](https://bundlephobia.com/package/data-mirror)
 
-# data-sync.js
+# data-mirror
 
 Sync data across **any\*** boundaries.
 
@@ -11,7 +11,7 @@ Sync data across **any\*** boundaries.
 
 ## Motivation 💥
 
-**data-sync.js** is a tool to synchronize data. It is extensible and can be used in various scenarios. Out of the box, it provides ways to synchronize within one window or across multiple tabs or windows (browser contexts).
+**data-mirror** is a tool to synchronize data. It is extensible and can be used in various scenarios. Out of the box, it provides ways to synchronize within one window or across multiple tabs or windows (browser contexts).
 
 ## Features 🔥
 
@@ -36,19 +36,19 @@ Sync data across **any\*** boundaries.
 ## Installation 📦
 
 ```console
-pnpm i data-sync.js
+pnpm i data-mirror
 // or
-yarn add data-sync.js
+yarn add data-mirror
 // or
-npm i data-sync.js
+npm i data-mirror
 ```
 
 ## Usage Example 🚀
 
 ```typescript
-import { DataSync } from 'data-sync.js';
+import { DataMirror } from 'data-mirror';
 
-const sync = new DataSync('my-sync', a => a);
+const sync = new DataMirror('my-sync', a => a);
 sync.listenForChanges(value => {
   console.log('new value:', value);
 });
@@ -58,20 +58,20 @@ sync.update('test value');
 ### With strategies
 
 ```typescript
-import { DataSync } from 'data-sync.js';
+import { DataMirror } from 'data-mirror';
 
-const sync = new DataSync('my-sync', a => a).withStrategy(
-  new DataSyncWindowStrategy(),
-  new DataSyncBroadcastStrategy()
+const sync = new DataMirror('my-sync', a => a).withStrategy(
+  new DataMirrorWindowStrategy(),
+  new DataMirrorBroadcastStrategy()
 );
 ```
 
 ### Implement a custom strategy
 
 ```typescript
-import { DataSyncStrategy, Payload } from 'data-sync.js';
+import { DataMirrorStrategy, Payload } from 'data-mirror';
 
-export class DataSyncBroadcastStrategy<T> extends DataSyncStrategy<T> {
+export class DataMirrorBroadcastStrategy<T> extends DataMirrorStrategy<T> {
 
   public init() {
     // Initialize the strategy
@@ -105,4 +105,4 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 Janik Schumacher - [@LoaderB0T](https://twitter.com/LoaderB0T) - [linkedin](https://www.linkedin.com/in/janikschumacher/)
 
-Project Link: [https://github.com/LoaderB0T/data-sync.js](https://github.com/LoaderB0T/data-sync.js)
+Project Link: [https://github.com/LoaderB0T/data-mirror](https://github.com/LoaderB0T/data-mirror)
