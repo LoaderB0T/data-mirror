@@ -58,7 +58,7 @@ sync.update('test value');
 ### With strategies
 
 ```typescript
-import { DataMirror } from 'data-mirror';
+import { DataMirror, DataMirrorWindowStrategy, DataMirrorBroadcastStrategy } from 'data-mirror';
 
 const sync = new DataMirror('my-sync', a => a).withStrategy(
   new DataMirrorWindowStrategy(),
