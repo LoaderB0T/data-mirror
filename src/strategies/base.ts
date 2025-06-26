@@ -5,7 +5,7 @@ import { Payload } from '../payload.js';
 export abstract class DataMirrorStrategy<T> {
   private _dataMirror?: DataMirror<T>;
   public readonly uniqueIdentifier = Symbol();
-  private _hash?: string;
+  private readonly _hashes: string[] = [];
 
   protected get dataMirrorId(): string {
     return this.dataMirror.id;
@@ -30,10 +30,14 @@ export abstract class DataMirrorStrategy<T> {
   public update(payload: Payload<T>) {
     getContext().executedStrategies.push(this.uniqueIdentifier);
 
-    if (this._hash === payload.hash) {
+    if (this._hashes.includes(payload.hash)) {
       return;
     }
-    this._hash = payload.hash;
+    this._hashes.push(payload.hash);
+    if (this._hashes.length > 100) {
+      this._hashes.shift(); // Keep the array size manageable
+    }
+
     this.onUpdate(payload);
   }
 

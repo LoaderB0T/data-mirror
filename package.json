@@ -1,6 +1,6 @@
 {
   "name": "data-mirror",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Sync data across *any* boundaries.",
   "main": "./lib/cjs/index.js",
   "exports": {
@@ -22,7 +22,8 @@
     "build-base": "tsc -p .",
     "build-esm": "pnpm build-base --outDir lib/esm",
     "build-cjs": "pnpm build-base --outDir lib/cjs --module commonjs && pnpm fix-cjs",
-    "build-test": "pnpm build-esm --sourceMap false && pnpm cpy --flat ./test/index.html ./lib/esm && pnpm build-esm --sourceMap false --watch",
+    "copy-test-html": "pnpm cpy --flat ./test/html/* ./lib/esm",
+    "build-test": "pnpm build-esm --sourceMap false && pnpm copy-test-html && pnpm build-esm --sourceMap false --watch",
     "start-test": "pnpm http-server ./lib/esm",
     "fix-cjs": "node --loader ts-node/esm ./fix-cjs.ts",
     "test-script": "node --loader ts-node/esm ./src/test.ts"

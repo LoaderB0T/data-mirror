@@ -17,7 +17,7 @@ export class DataMirror<T> {
   private readonly _callbacks: CallbackEntry<T>[] = [];
   private readonly _strategies: DataMirrorStrategy<T>[] = [];
   public readonly id: string;
-  private _hash: string = '';
+  private readonly _hashes: string[] = [];
 
   constructor(id: string, hashFn: (value: T) => string) {
     console.log('DataMirror constructor');
@@ -48,6 +48,7 @@ export class DataMirror<T> {
 
   public update(value: T) {
     runInContext(() => {
+      getContext().triggeredByMe = true;
       const hash = this._hashFn(value);
       this.updateFromStrategy({
         value,
@@ -57,10 +58,13 @@ export class DataMirror<T> {
   }
 
   public updateFromStrategy(payload: Payload<T>) {
-    if (this._hash === payload.hash) {
+    if (this._hashes.includes(payload.hash)) {
       return;
     }
-    this._hash = payload.hash;
+    this._hashes.push(payload.hash);
+    if (this._hashes.length > 100) {
+      this._hashes.shift(); // Keep the array size manageable
+    }
 
     const { executedStrategies } = getContext();
 
@@ -69,6 +73,9 @@ export class DataMirror<T> {
       .forEach(strategy => {
         strategy.update(payload);
       });
+    if (getContext().triggeredByMe) {
+      return;
+    }
     this._callbacks.forEach(entry => {
       entry.callback(payload.value);
     });

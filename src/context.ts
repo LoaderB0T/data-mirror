@@ -3,11 +3,13 @@ let isInContext = false;
 type Context = {
   hash: string;
   executedStrategies: symbol[];
+  triggeredByMe: boolean;
 };
 
 let context: Context = {
   hash: '',
   executedStrategies: [],
+  triggeredByMe: false,
 };
 
 export function runInContext<Return>(cb: (context: Context) => Return): Return {
@@ -27,6 +29,7 @@ function startContext() {
   context = {
     hash: '',
     executedStrategies: [],
+    triggeredByMe: false,
   };
 }
 

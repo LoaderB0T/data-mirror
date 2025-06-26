@@ -1,0 +1,24 @@
+<input id="text1"
+       type="text" />
+
+<script type="module">
+  import { DataMirror, DataMirrorWindowStrategy, DataMirrorBroadcastStrategy } from './test.js';
+
+  const dataMirror1 = new DataMirror('awd', a => a).withStrategy(
+    new DataMirrorWindowStrategy(),
+    new DataMirrorBroadcastStrategy()
+  );
+
+  const input1 = document.getElementById('text1');
+  input1.addEventListener('input', function (value) {
+    dataMirror1.update(value.target.value);
+  });
+  dataMirror1.listenForChanges(value => {
+    input1.value = value;
+  });
+</script>
+
+<iframe src="index3.html"
+        sandbox="allow-scripts allow-same-origin">
+
+</iframe>
