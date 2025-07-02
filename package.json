@@ -36,7 +36,7 @@
     "@awdware/prettier-config": "^1.0.0",
     "@jest/globals": "^30.0.3",
     "@types/jest": "^29.5.14",
-    "@types/node": "^22.9.3",
+    "@types/node": "^24.0.10",
     "cpy-cli": "^5.0.0",
     "eslint": "^9.15.0",
     "eslint-plugin-import": "2.31.0",
